@@ -1,0 +1,39 @@
+version: "3.2"
+services:
+
+  deluge:
+    image: linuxserver/deluge
+    ports:
+      - "8182:8112"
+    volumes:
+      - /mnt/Download/config/deluge:/config
+      - /mnt/Download:/downloads
+    restart: always
+    environment:
+      - PUID=1000
+      - PGID=1000
+
+  potato:
+    image: linuxserver/couchpotato
+    ports:
+      - "5050:5050"
+    volumes:
+      - /mnt/Download/config/couchpotato:/config
+      - /mnt/Download:/downloads
+      - /mnt/Download/done:/movies
+    restart: always
+    environment:
+      - PUID=1000
+      - PGID=1000
+  sickrage:
+    image: linuxserver/sickrage
+    ports:
+      - "8081:8081"
+    volumes:
+      - /mnt/Download/config/sickrage:/config
+      - /mnt/Download:/downloads
+      - /mnt/Download/tv:/tv
+    restart: always
+    environment:
+      - PUID=1000
+      - PGID=1000
